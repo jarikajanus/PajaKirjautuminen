@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Kirjautuminen Pajaan</title>
+  <link rel="stylesheet" href="muodot.css">
+  <script src="scriptit.js"></script>
+</head>
+<body>
+  <div class="kuva">
+    <img src="Keuda.jpg" alt="Keuda Keskikadun toimipisteen kuva">
+  </div>
+  <div class="yks">
+    <h1>Tervetuloa Pajaan</h1>
+    <h3>Kirjaudu antamalla nimesi (etunimi sukunimi) ja painamalla "Kirjaudu" -nappia</h3><br>
+    <input id="inputti" type="text" class="inputti" placeholder="Hemmo Harjoittelija" onkeypress="clickPress(event)"><br><br>
+    <div class="kaks">
+      <button type="button" class="b2" id="b2" onmouseover="Styde(2)" onmouseout="Back()" onClick="Tiedostoon()">Kirjaudu</button>
+    </div>
+  </div>
+  <div class="tulosta">
+    <!--<input id="inputti2" type="text" class="inputti2" placeholder="Kaikki>>>" onkeypress="clickPress2(event)">-->
+    <p id="ruudulle"></p>
+  </div>
+  <script>
+    LueTiedostosta();
+  </script>
+</body>
+</html>

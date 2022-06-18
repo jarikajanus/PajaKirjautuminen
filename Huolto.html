@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Kirjautuminen Pajaan/Huolto</title>
+  <link rel="stylesheet" href="muodot.css">
+  <script src="scriptit.js"></script>
+</head>
+<body>
+  <div class="kuva">
+    <img src="Keuda.jpg" alt="Keuda Keskikadun toimipisteen kuva">
+  </div>
+  <div class="yks">
+    <h1>Huoltotoimenpiteet</h1>
+    <h3>Paina haluamaasi toimintoa vastaavaa nappia</h3><br>
+    <table>
+      <tr>
+        <th>Toiminto:</th><th>Kuvaus:</th>
+      </tr>
+      <tr>
+        <td><button type="button" name="button" onClick="nollaaLS(1)">Poista</button></td><td>Poistaa kaikki kirjaukset muistista.</td>
+      </tr>
+      <tr>
+        <td><button type="button" name="button" onClick="nollaaLS(2)">Poista KK</button></td><td>Poistaa viimeisen kuukauden kirjaukset muistista.</td>
+      </tr>
+      <tr>
+        <td><button type="button" name="button" onClick="nollaaLS(3)">Poista VV</button></td>
+        <td>Poistaa kaikki viimeisen vuoden kirjaukset muistista.</td>
+      </tr>
+      <tr>
+        <td><button type="button" name="button" onClick="nollaaLS(4)">Poista oppilas</button></td>
+        <td>Poistaa kaikki oppilaan kirjaukset muistista.</td>
+      </tr>
+      <tr>
+        <td colspan="2"><input id="inputti2" type="text" placeholder="Hemmo Harjoittelija" onkeypress="clickPress(event)"></td>
+      </tr>
+    </table>
+  </div>
+  <div class="tulosta">
+    <p id="ruudulle"></p>
+  </div>
+  <script>
+    LueTiedostosta();
+  </script>
+</body>
+</html>
