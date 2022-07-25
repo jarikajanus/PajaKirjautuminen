@@ -1,0 +1,63 @@
+body {
+  background-color: #85e085;
+  overflow: hidden;
+}
+
+img {
+  width: 100%;
+}
+
+h1 {
+  font-size: 100px;
+}
+
+h3 {
+  font-size: 16px;
+  align-items: center;
+}
+
+.tulosta {
+  position: absolute;
+  width: 100%;
+  color: white;
+  display: none;
+}
+
+
+.tulosta2 {
+  position: absolute;
+  width: 100%;
+  color: white;
+  display: none;
+}
+
+.yks {
+  position: relative;
+  width: 30%;
+  transform: translateX(120%);
+  display: block;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.tulostus {
+  position: relative;
+  max-height: 200px;
+  width: 100%;
+  font-size: 9px;
+  overflow-y: scroll;
+}

@@ -1,0 +1,20 @@
+input[id="inputti"] {
+   width: 390px;
+   height: 40px;
+   border: none;
+   background-color: #ffffb3;
+   color: blue;
+   font-size: 16px;
+   margin-left: 2px;
+}
+
+input[id="ruska"] {
+  width: 372px;
+  height: 40px;
+  border: none;
+  background-color: #ffffb3;
+  color: blue;
+  font-size: 12px;
+  margin-left: 5px;
+  padding-left: 5px;
+}

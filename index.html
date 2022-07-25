@@ -5,27 +5,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Kirjautuminen Pajaan</title>
-  <link rel="stylesheet" href="muodot.css">
-  <script src="scriptit.js"></script>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="CSS/napit.css">
+  <link rel="stylesheet" href="CSS/muodot.css">
+  <link rel="stylesheet" href="CSS/taulukko.css">
+  <link rel="stylesheet" href="CSS/syotto.css">
+  <script src="js/Muotoilu.js"></script>
+  <script src="js/t.js"></script>
+  <script src="js/muuta.js"></script>
+  <script src="js/pvm.js"></script>
+  <script src="js/scriptit.js"></script>
+  <script src="js/eventit.js"></script>
 </head>
 <body>
-  <div class="kuva">
-    <img src="Keuda.jpg" alt="Keuda Keskikadun toimipisteen kuva">
-  </div>
-  <div class="yks">
-    <h1>Tervetuloa Pajaan</h1>
-    <h3>Kirjaudu antamalla nimesi (etunimi sukunimi) ja painamalla "Kirjaudu" -nappia</h3><br>
-    <input id="inputti" type="text" class="inputti" placeholder="Hemmo Harjoittelija" onkeypress="clickPress(event)"><br><br>
-    <div class="kaks">
-      <button type="button" class="b2" id="b2" onmouseover="Styde(2)" onmouseout="Back()" onClick="Tiedostoon()">Kirjaudu</button>
+  <div class="w3-display-container w3-text-black">
+    <img src="Kuvat/Keuda.jpg" alt="Keuda Keskikadun toimipisteen kuva" ondblclick="muuta()">
+    <div class="w3-display-middle w3-panel w3-round-xxlarge w3-teal w3-opacity-min">
+      <p class="w3-xxxlarge w3-text-black">Tervetuloa Pajaan</p>
     </div>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
   </div>
-  <div class="tulosta">
-    <!--<input id="inputti2" type="text" class="inputti2" placeholder="Kaikki>>>" onkeypress="clickPress2(event)">-->
-    <p id="ruudulle"></p>
+  <div class="tulosta" id="tulosta">
+    <table>
+      <tr>
+        <td><input type='text' id='ruska' name='ruska' class='ruska' placeholder='Etsittävän/poistettavan nimi...'
+          onkeypress='clickPress2(event)' onchange="LueTiedostosta()"></td>
+        <td><button type="button" class="ball b2" id="b2" onmouseover="Styde(2)" onmouseout="Back(2)"
+          onClick="poistaTiedot(2)">Poista valitut oppilaat</button></td>
+        <td><button type="button" class="ball b4" id="b4" onmouseover="Styde(4)" onmouseout="Back(4)"
+          onClick="poistaTiedot(3)">Poista valitut vuodet</button></td>
+        <td><button type="button" class="ball b3" id="b3" onmouseover="Styde(3)" onmouseout="Back(3)"
+          onClick="poistaTiedot(1)">Poista kaikki</button></td>
+      </tr>
+    </table>
+    <table>
+      <tr><td><p id="ruudulle"></p></td><td><p id="ruudulle2"></td></tr>
+    </table>
+  </div>
+  <div class="yks" id="yks">
+    <h3>Kirjaudu antamalla nimesi (etunimi sukunimi):<br>
+    <h3>Login with your name (firstname last name):</h3><br>
+    <input type="text" id="inputti" name="inputti" class="inputti" placeholder="Hemmo Harjoittelija" onkeypress="clickPress(event)" autofocus="autofocus"><br><br>
+    <button type="button" class="ball b1" id="b1" onmouseover="Styde(1)" onmouseout="Back(1)" onClick="KeraaTiedot()">Kirjaudu/Login</button>
   </div>
   <script>
     LueTiedostosta();
+    listaaVuodet();
   </script>
 </body>
 </html>

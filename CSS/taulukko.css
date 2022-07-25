@@ -1,0 +1,27 @@
+
+// Taulukon asetukset
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th {
+  text-align: center;
+  border-bottom: 1px solid #ddd
+  padding: 8px;
+  width: 220px;
+}
+
+td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #006622;
+}
+
+td:hover {
+  color: black;
+  text-decoration: underline;
+}

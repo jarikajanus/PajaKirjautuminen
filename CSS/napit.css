@@ -1,0 +1,28 @@
+.ball {
+  width: 150px;
+  height: 30px;
+  background-color: #c3c388;
+  color: blue;
+  font-size: 12px;
+}
+
+.b1 {
+     margin-left: 10px;
+}
+
+.b2 {
+     margin-left: 2px;
+}
+
+.b3 {
+     margin-left: 2px;
+}
+
+.b4 {
+     width: 200px;
+     margin-left: 2px;
+}
+
+.b5 {
+  width: 370px;
+}
