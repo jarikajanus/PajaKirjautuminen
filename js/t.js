@@ -51,11 +51,60 @@ function poistaTiedot(a) {
 }
 
 function tayta() {
-  let x = 365*24*60*60*1000;
-  const d = new Date(x);
-  alert("x = " + x + ", d = " + d);
-  /*const tiedot = [
-    "Jari Kajanus",
-  ];
-  foreach*/
+  let x1=0;x2=0;
+  let text = "";
+  if(parseInt(localStorage.getItem("vika")) >= 0) x1 = parseInt(localStorage.getItem("vika"))+1;
+  x2 = + new Date(2018, 11, 24, 10, 33, 30, 180);
+  text = "Jari Kajanus," + x2;
+  console.log("x1 = "+x1+", text = " + text);
+  localStorage.setItem(x1,text);
+
+  x1++;
+  x2 = + new Date(2019, 11, 24, 10, 33, 30, 180);
+  text = "Jukka Kuusisto," + x2;
+  console.log("x1 = "+x1+", text = " + text);
+  localStorage.setItem(x1,text);
+
+  x1++;
+  x2 = + new Date(2019, 10, 24, 10, 33, 30, 180);
+  text = "Oona Hakkarainen," + x2;
+  console.log("x1 = "+x1+", text = " + text);
+  localStorage.setItem(x1,text);
+
+  x1++;
+  x2 = + new Date(2017, 10, 24, 10, 33, 30, 180);
+  text = "Jukka Kolehmainen," + x2;
+  console.log("x1 = "+x1+", text = " + text);
+  localStorage.setItem(x1,text);
+
+  x1++;
+  x2 = + new Date(2017, 10, 24, 10, 33, 30, 180);
+  text = "Virpi Vakka," + x2;
+  console.log("x1 = "+x1+", text = " + text);
+  localStorage.setItem(x1,text);
+
+  x1++;
+  x2 = + new Date(2016, 10, 24, 10, 33, 30, 180);
+  text = "Seppo Junkkari," + x2;
+  console.log("x1 = "+x1+", text = " + text);
+  localStorage.setItem(x1,text);
+
+  x1++;
+  x2 = + new Date(2016, 10, 24, 10, 33, 30, 180);
+  text = "Minna Kajanus," + x2;
+  console.log("x1 = "+x1+", text = " + text);
+  localStorage.setItem(x1,text);
+
+  x1++;
+  x2 = + new Date(2022, 10, 24, 10, 33, 30, 180);
+  text = "Hanna Hakulinen," + x2;
+  console.log("x1 = "+x1+", text = " + text);
+  localStorage.setItem(x1,text);
+
+  x1++;
+  x2 = + new Date(2022, 10, 24, 10, 33, 30, 180);
+  text = "Jerkku Jymy," + x2;
+  console.log("x1 = "+x1+", text = " + text);
+
+  localStorage.setItem("vika", x1);
 }

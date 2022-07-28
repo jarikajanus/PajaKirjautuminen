@@ -23,7 +23,7 @@
     <div class="w3-display-middle w3-panel w3-round-xxlarge w3-teal w3-opacity-min">
       <p class="w3-xxxlarge w3-text-black">Tervetuloa Pajaan</p>
     </div>
-    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script src="https://smtpjs.com/v3/smtp.js">document.getElementById("inputti").focus;</script>
   </div>
   <div class="tulosta" id="tulosta">
     <table>
@@ -47,6 +47,7 @@
     <h3>Login with your name (firstname last name):</h3><br>
     <input type="text" id="inputti" name="inputti" class="inputti" placeholder="Hemmo Harjoittelija" onkeypress="clickPress(event)" autofocus="autofocus"><br><br>
     <button type="button" class="ball b1" id="b1" onmouseover="Styde(1)" onmouseout="Back(1)" onClick="KeraaTiedot()">Kirjaudu/Login</button>
+    <p id="virhetieto" class="vikaa"></p>
   </div>
   <script>
     LueTiedostosta();

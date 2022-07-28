@@ -61,3 +61,12 @@ h3 {
   font-size: 9px;
   overflow-y: scroll;
 }
+
+.vikaa {
+  color: red;
+  background-color: blue;
+  font-weight: bolder;
+  box-shadow: 2px 2px;
+  transition-delay: 2.25
+  opacity = 100%;
+}

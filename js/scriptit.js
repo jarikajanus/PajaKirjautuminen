@@ -24,31 +24,37 @@ function Kirjoita(nimet) {
 
 // tietojen haku kirjautumissivulta
 function KeraaTiedot() {
-  let kirjoitettu = document.getElementById('inputti').value;
-  let kaksi = true;
-  let tat = true;
-  let sukunimi = false;
-  let iov = kirjoitettu.indexOf(" ");
-  let pit = kirjoitettu.length;
-  if(!kirjoitettu.includes("täytä")) tat = false;
-  if(!kirjoitettu.includes(" ")) kaksi = false;
-  if(kaksi && pit > iov+2) sukunimi = true;
-  if(pit > 4){
-    if(tat && kaksi) {
-      alert("Nyt en ymmärrä, yritä uudelleen");     // VIRHE, jos käyttäjä yrittää täyttää rekisterin ja lisää tekstiin välilyönnin
+  let kirjoitettu = document.getElementById('inputti').value; // Haetaan sivulta käyttäjän kirjoittama teksti elementistä 'inputti'
+  let virheteksti = "";                                       // alustetaan virheteksti ja annetaan alkuarvoksi tyhjä merkkijono
+  let kaksi = true;                                           // alustetaan boolean -tyyppimnen muuttuja ja annetaan alkuarvo 'true'
+  let tat = true;                                             // -''-
+  let sukunimi = false;                                       // -''-
+  let iov = kirjoitettu.indexOf(" ");                         // Haetaan muuttujaan iov kirjoitettu -muuttujassa olevan välilyönnin indeksi
+  let pit = kirjoitettu.length;                               // Haetaan muuttujaan pit kirjoitettu -muuttujassa olevan tekstin pituus
+  if(!kirjoitettu.includes("täytä")) tat = false;             // Tarkastetaan, onko kirjoitettu sana "täytä": on => tat = false
+  if(!kirjoitettu.includes(" ")) kaksi = false;               // Tarkastetaan, onko kirjoitettu välilyönti: on => kaksi = false
+  if(kaksi && pit > iov+2) sukunimi = true;                   // Jos on välilyönti ja pituus on suurempi, kuin kaksi välilyntiä, sukunimi on olemassa
+  if(pit > 4){                                                // Jos kirjoitetun teksin pituus on enemmän kuin 4, aloitetaan!
+    if(tat && kaksi) {                                        // Jos tekstissä ei ole sanaa "täytä" ja jos on syötetty kaksi sanaa välilyönnillä erotettuina, aloitetaan!
+      // VIRHE, jos käyttäjä yrittää täyttää rekisterin ja lisää tekstiin välilyönnin
+      virheteksti += "'täytä' ja välilyönti samaan aikaan ei ole sallittua";
     }
-    else if(!tat && !kaksi && !sukunimi) {
-      alert("Nyt en ymmärrä, yritä uudelleen (sukunimi puuttuu))");     // VIRHE, jos käyttäjä yrittää täyttää rekisterin ei lisää välilyöntiä ja sukunime
+    else if(!tat && !kaksi && !sukunimi) {                    // Jos tekstissä ei ole sanaa 'täyttö' eikä välilyöntiä eikä sukunimeä
+      // VIRHE, jos käyttäjä ei yrittä täyttää rekisteriä eikä lisää välilyöntiä ja sukunimeä
+      virheteksti += "Sukunimi puuttuu";
     }
-    else if(tat && !kaksi) tayta();                 // Ei virhettä, käynnistetään täyttöprosessi
-    else if (!tat && kaksi && !sukunimi) {
-      alert("Nyt en ymmärrä, yritä uudelleen (sukunimi puuttuu)");     // VIRHE, jos käyttäjä yrittää täyttää rekisterin ei lisää välilyöntiä ja sukunime
+    else if(tat && !kaksi) tayta();                           // Ei virhettä, käynnistetään täyttöprosessi
+    else if (!tat && kaksi && !sukunimi) {                    // Jos tekstissä ei ole sanaa 'täyttö' mutta välilyönti on ilman sukunimeä
+      // VIRHE, jos käyttäjä yrittää täyttää rekisterin eikä lisää välilyöntiä ja sukunimeä
+      virheteksti += "Sukunimi puuttuu";
     }
-    else if(!tat && kaksi && sukunimi) Kirjoita(kirjoitettu);   // Ei virhettä, kirjoitetaan rekisteriin
+    else if(!tat && kaksi && sukunimi) Kirjoita(kirjoitettu);  // Ei virhettä, kirjoitetaan rekisteriin
   }
   else if(pit > 0 && pit <= 4) {
-    alert("Really? Yritä uudelleen");               // VIRHE, jos pituus on suurempi kuin 0 mutta jää silti neljään merkkiin
+    // VIRHE, jos pituus on suurempi kuin 0 mutta jää silti neljään merkkiin
+    virheteksti += "Really? Yritä uudelleen";
   }
+  document.getElementById('virhetieto').innerHTML=virheteksti;
 }
 
 // 2.
@@ -65,21 +71,21 @@ function tarkastaNimi(vl) {
 // Hakutiedot tiedostosta ruudulle
 function LueTiedostosta() {
   // Alustetaan muuttujat
-  let max = 0;   // silmukan maksimiarvo
-  let min = 0;   // silmukan minimiarvo
-  let vr = "";   // tallenteista luettu rivi
-  let vl = [];   // tallenne purettuna pilkulla erotettuihin lohkoihin (= taulukon arvoihin); 0 = nimi, 1 = aikaleima
-  let nimi = ""; // alustetaan muuttuja nimitiedolle (taulukon 1. arvo)
-  let aika = ""; // alustetaan muuttuja käynnin aikatiedolle (taulukon 2. arvo)
+  let max = -1;       // silmukan maksimiarvo
+  let min = 0;        // silmukan minimiarvo
+  let vr = "";        // tallenteista luettu rivi
+  let vl = [];        // tallenne purettuna pilkulla erotettuihin lohkoihin (= taulukon arvoihin); 0 = nimi, 1 = aikaleima
+  let nimi = "";      // alustetaan muuttuja nimitiedolle (taulukon 1. arvo)
+  let aika = "";      // alustetaan muuttuja käynnin aikatiedolle (taulukon 2. arvo)
+  let tulosta = "";   // alustetaan muuttuja tulostettavalle tiedolle
   if(localStorage.getItem("vika")) max = localStorage.getItem("vika"); // annetaan maksimiarvoksi tallennettu arvo
   // perustetaan silmukka; käytetään minimi ja maksimiarvoina aiemmin haettua ja laskettua arvoa
   if(max >= 0) {
+    // luodaan lomake ja annetaan sille id "lomake1"
+    tulosta = "<form id='lomake1'>";
     // Luodaan tulostettava taulukko ja annetaan sille alkuarvoksi otsikkotiedot ja määritetään taulukon leveydet
-    let teksti = "Lista lähetetty!";
-    let tulosta = '<div><td><button type="button" class="ball b5" id="b5" onmouseover="Styde(5)" onmouseout="Back(5)" onClick="sendEmail(' + teksti + ')">Lista/merkityt s-postiin</button></td>';
-    tulosta += "</div><div class='tulostus'>";
-    //tulosta += "</div><div class='tulostus'>";
-    tulosta += "<table><tr><th style='width:220px'>Nimi</th><th style='width:73px'>Aika</th><th style='width:25px'>Poista?</th></tr>";
+    tulosta += "<div class='tulostus'><table>";
+    tulosta += "<tr><th style='width:220px'>Nimi</th><th style='width:73px'>Aika</th><th style='width:25px'>Poista?</th></tr>";
     for(var i = max;i >= min; i--) {
       vr = localStorage.getItem(i);   // Haetaan tallennustilasta i -laskurin rivinumerolla olevaa arvoa
       vl = vr.split(",");             // hajotetaan arvo pilkulla erotettuihin ja tallennetaan ne vl -taulukkoon
@@ -89,34 +95,38 @@ function LueTiedostosta() {
       if(tarkastaNimi(vl[0])) tulosta += "<tr><td width='220px'>" + nimi + "</td><td width='73px'>" + aika
         + "</td><td><input type='checkbox' name='T" + i + "'></td></tr>";
     }
-    tulosta += '</table></div>';
-    // tulostetaan taulukko näyttöön sille HTML -koodissa p- ja id -koodeilla varattuun tilaan
-    document.getElementById("ruudulle").innerHTML=tulosta;
-    // "nollataan" sivujen syöttöruudut
-    document.getElementById("ruska").value="";
-    document.getElementById("inputti").focus;
+    tulosta += '</table></div></form>';
   }
+  else tulosta = "<div class='tulostus'>--- ei arvoja ---</div>";
+  // tulostetaan taulukko näyttöön sille HTML -koodissa p- ja id -koodeilla varattuun tilaan
+  document.getElementById("ruudulle").innerHTML=tulosta;
+  // "nollataan" sivujen syöttöruudut
+  document.getElementById("ruska").value="";
+  document.getElementById("inputti").focus;
 }
 
 function listaaVuodet() {
   const tulosta2 = [];                                                              // esitellään taulukko
-  let ruudulle = "<div class='tulostus'>";                                          // esitellään tulostattava tekstimuuttuja
+  let ruudulle = "<form id='lomake2'><div class='tulostus'>";                       // esitellään tulostettava tekstimuuttuja
   ruudulle += "<table><tr><th style='width:220px'>Vuosi</th><th style='width:25px'>Poista?</th></tr>";
-  let max = 0;                                                                      // esitellään silmukan maksimiarvo
+  let max = -1;                                                                      // esitellään silmukan maksimiarvo
   let vr = "";                                                                      // esitellään muuttuja tallenteista luettua riviä varten
-  if(localStorage.getItem("vika")) max = localStorage.getItem("vika");              // annetaan maksimiarvoksi tallennettu arvo
-  for(let i=0; i<=max; i++) {
-    vr = localStorage.getItem(i);                                                   // Haetaan tallennustilasta i -laskurin rivinumerolla olevaa arvoa
-    vl = vr.split(",");                                                             // hajotetaan arvo pilkulla erotettuihin ja tallennetaan ne vl -taulukkoon
-    aika = vvlaskenta(parseInt(vl[1]));                                             // aika -muuttujalle annetaan pvmlaskenta -funktiossa määritetty teksti
-    //alert(aika);
-    if(!tulosta2.includes(aika)) tulosta2.push(aika);                               // lisätään vuosi luetteloon jos soitä ei vielä ole
+  if(localStorage.getItem("vika")) {
+    max = localStorage.getItem("vika");                                             // annetaan maksimiarvoksi tallennettu arvo
+    for(let i=0; i<=max; i++) {
+      vr = localStorage.getItem(i);                                                   // Haetaan tallennustilasta i -laskurin rivinumerolla olevaa arvoa
+      vl = vr.split(",");                                                             // hajotetaan arvo pilkulla erotettuihin ja tallennetaan ne vl -taulukkoon
+      aika = vvlaskenta(parseInt(vl[1]));                                             // aika -muuttujalle annetaan pvmlaskenta -funktiossa määritetty teksti
+      //alert(aika);
+      if(!tulosta2.includes(aika)) tulosta2.push(aika);                               // lisätään vuosi luetteloon jos soitä ei vielä ole
+    }
+    tulosta2.sort();
+    tulosta2.reverse();
+    for(let i=0; i<tulosta2.length; i++) {
+      ruudulle += "<tr><td width='220px'>" + tulosta2[i].toString()
+        + "</td><td><input type='checkbox' name='P" + i + "'></td></tr>";
+    }
+    ruudulle += '</table></div></form>';
+    document.getElementById("ruudulle2").innerHTML = ruudulle;
   }
-  tulosta2.sort();
-  for(let i=0; i<tulosta2.length; i++) {
-    ruudulle += "<tr><td width='220px'>" + tulosta2[i].toString()
-      + "</td><td><input type='checkbox' name='P" + i + "'></td></tr>";
-  }
-  ruudulle += '</table></div>';
-  document.getElementById("ruudulle2").innerHTML = ruudulle;
 }
