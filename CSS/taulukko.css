@@ -10,6 +10,7 @@ th {
   border-bottom: 1px solid #ddd
   padding: 8px;
   width: 220px;
+  color: white;
 }
 
 td {
@@ -19,9 +20,4 @@ td {
 
 tr:nth-child(even) {
   background-color: #006622;
-}
-
-td:hover {
-  color: black;
-  text-decoration: underline;
 }
