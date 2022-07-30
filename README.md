@@ -6,3 +6,4 @@ Tiedot tallennetaan sen hetkisen koneen ja sen selaimen tietovarastoon. Tallennu
 Tiedot eivät katoa selaimen ja koneen uudellenkäynnistyksen yhteydessä.
 Tietoja ei voi kopioida tiedostoon (varmuuskopio).
 Tiedot katoavat, jos laite vaihdetaan tai sen käyttö estyy (rikkoutuminen etc.).
+Tiedot poistuvat myös, jos selaimen asetuksissa poistetaan väliaikaistiedostot, tarkemmin evästeet
