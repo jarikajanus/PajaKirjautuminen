@@ -1,5 +1,5 @@
 function pvmlaskenta(Vl) {
-  const Time =new Date(Vl);
+  const Time = new Date(Vl);
   let t = "",m = "",p = "",k = "",y = "";
   let tunnit = parseInt(Time.getHours());
   if(tunnit<10) t="0" + tunnit.toString();
@@ -10,7 +10,7 @@ function pvmlaskenta(Vl) {
   let pv = parseInt(Time.getDate());
   if(pv<10) p="0" + pv.toString();
   else p=pv.toString();
-  let kk = parseInt(Time.getMonth());
+  let kk = parseInt(Time.getMonth())+1;
   if(kk<10) k="0" + kk.toString();
   else k=kk.toString();
   let yr = parseInt(Time.getFullYear());

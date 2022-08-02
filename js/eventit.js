@@ -6,6 +6,6 @@ function clickPress(event) {
 
 function clickPress2(event) {
   if (event.keyCode == 13) {
-      LueTiedostosta();
+      lueTiedostosta();
   }
 }

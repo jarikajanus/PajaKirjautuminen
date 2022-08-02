@@ -11,10 +11,10 @@
   <link rel="stylesheet" href="CSS/taulukko.css">
   <link rel="stylesheet" href="CSS/syotto.css">
   <script src="js/Muotoilu.js"></script>
-  <script src="js/t.js"></script>
   <script src="js/muuta.js"></script>
   <script src="js/pvm.js"></script>
   <script src="js/scriptit.js"></script>
+  <script src="js/t.js"></script>
   <script src="js/eventit.js"></script>
 </head>
 <body>
@@ -23,16 +23,16 @@
     <div class="w3-display-middle w3-panel w3-round-xxlarge w3-teal w3-opacity-min">
       <p class="w3-xxxlarge w3-text-black">Tervetuloa Pajaan</p>
     </div>
-    <script src="https://smtpjs.com/v3/smtp.js">document.getElementById("inputti").focus;</script>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
   </div>
   <div class="tulosta" id="tulosta">
     <table>
       <tr>
         <td><input type='text' id='ruska' name='ruska' class='ruska' placeholder='Etsittävän/poistettavan nimi...'
-          onkeypress='clickPress2(event)' onchange="LueTiedostosta()"></td>
+          onkeypress='clickPress2(event)' onchange='lueTiedostosta(this.value)'></td>
         <td><button type="button" class="ball b2" id="b2" onmouseover="Styde(2)" onmouseout="Back(2)"
-          onClick="poistaTiedot(2)"><--&nbsp;Poista oppilas</button></td>
-        <!-- <td><button type="button" class="ball b4" id="b4" onmouseover="Styde(4)" onmouseout="Back(4)"
+          onClick="poistaTiedot(2)">Poista valitut oppilaat</button></td>
+        <!--<td><button type="button" class="ball b4" id="b4" onmouseover="Styde(4)" onmouseout="Back(4)"
           onClick="poistaTiedot(3)">Poista valitut vuodet</button></td>-->
         <td><button type="button" class="ball b3" id="b3" onmouseover="Styde(3)" onmouseout="Back(3)"
           onClick="poistaTiedot(1)">Poista kaikki</button></td>
@@ -47,10 +47,10 @@
     <h3>Login with your name (firstname last name):</h3><br>
     <input type="text" id="inputti" name="inputti" class="inputti" placeholder="Hemmo Harjoittelija" onkeypress="clickPress(event)" autofocus="autofocus"><br><br>
     <button type="button" class="ball b1" id="b1" onmouseover="Styde(1)" onmouseout="Back(1)" onClick="KeraaTiedot()">Kirjaudu/Login</button>
-    <p id="virhetieto" class="vikaa"></p>
+    <p id="virhetieto" class="vikaa"></p><div>
   </div>
   <script>
-    LueTiedostosta();
+    lueTiedostosta();
   </script>
 </body>
 </html>

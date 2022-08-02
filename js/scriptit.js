@@ -1,3 +1,12 @@
+// asetetaan systeemi odottamaan aika -muuttujassa määritelty sekuntimäärä ja ladataan ikkuna uudelleen sen jälkeen
+function sleep(aika) {
+    aika = aika * 1000;                  // muutetaan sekunnit millisekunneiksi
+    setTimeout(function(){
+        location.reload();               // Uudistetaan selainikkuna => tyhjennetään syöttöikkuna
+    }, aika);
+  }
+
+// Muuttaa kahden sanan ensimmäiset kirjaimet isoiksi, muuten pieniä
 function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
@@ -8,12 +17,10 @@ function Kirjoita(nimet) {
   // Esitellään muuttujat
   name = nimet.toLowerCase();
   const IsotName = name.split(' ').map(capitalize).join(' '); // muutetaan ekat sanat alkamaan isolla kirjaimella
-  const d = new Date();                                // esitellään d -muuttuja, jonka alkuarvona päivämäärä
-  let time  = d.getTime();                             // annetaan Time -muuttujalle arvoksi pitkä aika-arvo (millisekuntien määrä 1.1.1970 alkaen)
-  localStorage.setItem(time, IsotName);                // Kirjotetaan tallennustilaan nimi- ja aikatiedot
-  //sisus.unshift(time + "," + IsotName);                // lisätään taulukon alkuun uusi arvo
-  location.reload();                                   // Uudistetaan selainikkuna => tyhjennetään syöttöikkuna
-  document.getElementById('inputti').focus();          // asetetaan kohdistin syöttöikkunaan
+  const d = new Date();                                       // esitellään d -muuttuja, jonka alkuarvona päivämäärä
+  let time  = d.getTime();                                    // annetaan Time -muuttujalle arvoksi pitkä aika-arvo (millisekuntien määrä 1.1.1970 alkaen)
+  // annetaan alkuarvoksi tallennettu viimeistä arvoa vastaava arvo, jos se on olemassa
+  localStorage.setItem(time, IsotName);                       // Kirjotetaan tallennustilaan nimi- ja aikatiedot
 }
 
 // tietojen haku kirjautumissivulta
@@ -30,28 +37,31 @@ function KeraaTiedot() {
   if(kaksi && pit > iov+2) sukunimi = true;                   // Jos on välilyönti ja pituus on suurempi, kuin kaksi välilyntiä, sukunimi on olemassa
   if(pit > 4){                                                // Jos kirjoitetun teksin pituus on enemmän kuin 4, aloitetaan!
     if(tat && kaksi) {                                        // Jos tekstissä ei ole sanaa "täytä" ja jos on syötetty kaksi sanaa välilyönnillä erotettuina, aloitetaan!
-      // VIRHE, jos käyttäjä yrittää täyttää rekisterin ja lisää tekstiin välilyönnin
-      virheteksti += "'täytä' ja välilyönti samaan aikaan ei ole sallittua";
+      virheteksti += "Sana 'täytä' ja välilyönti samaan aikaan ei ole sallittua!";
     }
     else if(!tat && !kaksi && !sukunimi) {                    // Jos tekstissä ei ole sanaa 'täyttö' eikä välilyöntiä eikä sukunimeä
-      // VIRHE, jos käyttäjä ei yrittä täyttää rekisteriä eikä lisää välilyöntiä ja sukunimeä
-      virheteksti += "Sukunimi puuttuu";
+      virheteksti += "Sukunimi puuttuu...";
     }
     else if(tat && !kaksi) {
       tayta();                                                // Ei virhettä, käynnistetään täyttöprosessi
-      virheteksi += "Tervetuloa Pajaan!";                     // Tervetuloteksti onnistuttaessa
+      virheteksti = "Täyttö tehty.";
     }
     else if (!tat && kaksi && !sukunimi) {                    // Jos tekstissä ei ole sanaa 'täyttö' mutta välilyönti on ilman sukunimeä
-      // VIRHE, jos käyttäjä yrittää täyttää rekisterin eikä lisää välilyöntiä ja sukunimeä
-      virheteksti += "Sukunimi puuttuu";
+      virheteksti += "Sukunimi puuttuu...";
     }
-    else if(!tat && kaksi && sukunimi) Kirjoita(kirjoitettu);  // Ei virhettä, kirjoitetaan rekisteriin
+    else if(!tat && kaksi && sukunimi) {
+      Kirjoita(kirjoitettu);                                  // Ei virhettä, kirjoitetaan rekisteriinname = nimet.toLowerCase();
+      kirjoitettu = kirjoitettu.toLowerCase();
+      const IsotName = kirjoitettu.split(' ').map(capitalize).join(' '); // muutetaan ekat sanat alkamaan isolla kirjaimella
+      virheteksti = "Tervetuloa Pajaan, " + IsotName + "!";
+    }
   }
-  else if(pit > 0 && pit <= 4) {
-    // VIRHE, jos pituus on suurempi kuin 0 mutta jää silti neljään merkkiin
-    virheteksti += "Really? Yritä uudelleen";
+  else if(pit > 0 && pit <= 4) {                              // VIRHE, jos pituus on suurempi kuin 0 mutta jää silti neljään merkkiin
+    virheteksti += "Really? Yritä uudelleen...";
   }
   document.getElementById('virhetieto').innerHTML=virheteksti;
+  sleep(5);
+  document.getElementById('inputti').focus();
 }
 
 // 2.
@@ -66,56 +76,66 @@ function tarkastaNimi(vl) {
 }
 
 // Hakutiedot tiedostosta ruudulle
-function LueTiedostosta() {
+//function lueTiedostosta() {
+function lueTiedostosta() {
   // Alustetaan muuttujat
-  let tulosta = "";   // alustetaan muuttuja tulostettavalle tiedolle
-  const tulosta2 = [];// esitellään vuosille taulukko
-  let vr = "";        // alustetaan muuttuja localStoragesta haettavalle tekstille
-  let vl = [];        // alustetaan muuttuja hajotettavasta taulukon arvosta saataville kahdelle arvolle
-  let nimi = "";      // alustetaan muuttuja nimitiedolle (taulukon 1. arvo)
-  let aika = "";      // alustetaan muuttuja käynnin aikatiedolle (taulukon 2. arvo)
-  let avain = "";     // alustetaan muuttuja localStoragesta haettavan avaimen koodille
-  let totuus = true;  // alustetaan totuusarvomuuttuja ja annetaan sille alkuarvo "true"
-  let laskuri = 0;    // alustetaan laskurimuuttuja ja annetaan sille alkuarvo 1
-  let vuodet = "";    // esitellään vuodet -muuttuja ja annetaan alkuarvoksi tyhjä merkkijono
-  let ruudulle = "<form id='lomake2'><div class='tulostus'>";  // esitellään tulostettava vuosien tekstimuuttuja ja annetaan sille id:ksi "lomake2"
-  // luodaan tulostettaville kirjaustiedoille lomake ja annetaan sille id "lomake1"
-  tulosta = "<form id='lomake1'>";
-  // Luodaan tulostettaville vuosille taulukko
-  ruudulle += "<table><tr><th style='width:220px'>Vuosi</th><th style='width:25px'>Poista?</th></tr>";
-  // Luodaan tulostettava taulukko ja annetaan sille alkuarvoksi otsikkotiedot ja määritetään taulukon leveydet
-  tulosta += "<div class='tulostus'><table>";
-  tulosta += "<tr><th style='width:220px'>Nimi</th><th style='width:73px'>Aika</th></tr>";
-  do {                                                    // Aloitetaan silmukka arvojen haulle localStoragesta
-    if(avain = localStorage.key(laskuri)) {               // Haetaan localStoragesta seuraava avain
-      vr = avain + "," + localStorage.getItem(avain);     // asetetaan taulukkoon arvoksi teksti, jossa on avain ja arvo pilkulla erotettuina
-      vl = vr.split(",");                                 // hajotetaan arvo pilkulla erotettuihin ja tallennetaan ne vl -taulukkoon
-      nimi = '"' + vl[1] + '"';                           // nimi -muuttuja saa arvoksi taulukon ensimmäisen arvon
-      aika = pvmlaskenta(parseInt(vl[0]));                // aika -muuttujalle annetaan pvmlaskenta -funktiossa määritetty teksti
-      // tulosta -muuttujaan lisätään taulukon rivi, jossa esitetään kirjautumisen yhteydessä tallennetut nimi- ja aikatiedot
-      if(tarkastaNimi(vl[1])) tulosta += "<tr><td width='220px'>" + nimi + "</td><td width='73px'>" + aika
-        + "</td></tr>";
-      vuodet = vvlaskenta(parseInt(vl[0]));   // aika -muuttujalle annetaan pvmlaskenta -funktiossa määritetty teksti
-      if(!tulosta2.includes(vuodet)) tulosta2.push(vuodet);  // lisätään vuosi luetteloon jos sitä ei vielä ole
-      laskuri++;                                          // Lisätään laskurin arvoa yhdellä vseuraavaa kierrosta varten
+  let laskuri = 0;
+  let tot = true;                                              // silmukan minimiarvo
+  let vr = [];                                                 // nimestä ja ajasta saatu taulukko
+  let nimi = "";                                               // alustetaan muuttuja nimitiedolle
+  let aika = "";                                               // alustetaan muuttuja käynnin aikatiedolle
+  let vuosi = "";                                              // esitellään vuosi -muuttuja
+  let tulosta = "</div><div class='tulostus'>";                // esitellään kirjautuneiden luettelo
+  tulosta += "<table><tr><th style='width:400px'>Nimi</th><th style='width:100px'>Aika</th></tr>";
+  let ruudulle = "<div class='tulostus'>";                     // esitellään vuosien luettelo
+  ruudulle += "<table><tr><th style='width:220px'>Vuosi</th></tr>";
+  const vuosiLuettelo = [];                                    // esitellään vuosilukujen taulukko
+  const nimet_a = [];                                          // Luodaan taulukko a (lajiteltu nimen nukaan)
+  let avain = "";
+  // perustetaan silmukka; käytetään minimi ja maksimiarvoina aiemmin haettua ja laskettua arvoa
+  // haetaan arvot ja tallennetaan ne taulukoihin
+  do {
+    if(avain = localStorage.key(laskuri)) {                    // Haetaan localStoragesta seuraava avain
+      nimi = localStorage.getItem(avain);                      // nimi -muuttuja saa arvoksi taulukon arvon
+      aika = pvmlaskenta(parseInt(avain));                     // aika -muuttujalle annetaan pvmlaskenta -funktiossa määritetty numero
+      vuosi = vvlaskenta(parseInt(avain));                     // vuosi -muuttujalle annetaan vvlaskenta -funktiossa määritetty numero
+      if(!vuosiLuettelo.includes(vuosi)) {
+        vuosiLuettelo.push(vuosi);                             // lisätään vuosi luetteloon jos sitä ei vielä ole
+      }
+      laskuri++;                                               // kasvatetaan laskuria yhdellä
+      nimet_a.push(avain + "," + aika + "," + nimi);           // lisätään taulukkoon tallenne
     }
-    else totuus = false;
+    else tot = false;
   }
-  while(totuus);
-  if(laskuri > 0) tulosta += '</table></div></form>';
-  else tulosta = "<div class='tulostus'>--- ei arvoja ---</div>";
-  tulosta2.sort();
-  tulosta2.reverse();
-  for(let i=0; i<tulosta2.length; i++) {
-    ruudulle += "<tr><td width='220px'>" + tulosta2[i].toString()
-      + "</td><td onclick='poista(2," + tulosta2[i].toString() + ")'>Click</td></tr>";
-       /*onclick='poista(2," + i + ")'*/
+  while (tot);
+  // lajitellaan taulukot
+  vuosiLuettelo.sort();
+  vuosiLuettelo.reverse();
+  nimet_a.sort();
+  nimet_a.reverse();
+  // Luodaan HTML -koodit, joilla luettelot näytetään
+  // Ensin vuodet
+  for(i = 0; i < vuosiLuettelo.length; i++) {
+    ruudulle += "<tr><td width='220px'>" + vuosiLuettelo[i] + "</td></tr>";  // lisätään tulostettavaan luetteloon vuosiluku
   }
-  ruudulle += '</table></div></form>';
-  document.getElementById("ruudulle2").innerHTML = ruudulle;
-  // tulostetaan taulukko näyttöön sille HTML -koodissa p- ja id -koodeilla varattuun tilaan
+  // sitten kirjautuneet
+  for(i = 0; i < nimet_a.length; i++) {
+    vr = nimet_a[i].split(",");
+    nimi = vr[2];
+    aika = vr[1];
+    avain = document.getElementById("ruska").value.toLowerCase();           // muutetaan kaikki kirjaimet pieniksi
+    const IsotSivulta = avain.split(' ').map(capitalize).join(' ');       // muutetaan ekat sanat alkamaan isolla kirjaimella
+    if(IsotSivulta == nimi || !avain) {
+      tulosta += "<tr><td width='220px'>\"" + nimi + "\"</td><td width='73px'>" + aika + "</td></tr>";
+    }
+  }
+  // viimeistellään tulostettavat koodit
+  tulosta += '</table></div>';
+  ruudulle += '</table></div>';
+  // tulostetaan taulukot näyttöön niille HTML -koodissa p- ja id -koodeilla varattuihin tiloihin
   document.getElementById("ruudulle").innerHTML=tulosta;
+  document.getElementById("ruudulle2").innerHTML = ruudulle;
   // "nollataan" sivujen syöttöruudut
-  //document.getElementById("ruska").value="";
+  document.getElementById("ruska").innerHTML="";
   document.getElementById("inputti").focus;
 }

@@ -11,11 +11,13 @@ th {
   padding: 8px;
   width: 220px;
   color: white;
+  font-size: 13px;
 }
 
 td {
   text-align: left;
   padding: 8px;
+  font-size: 13px;
 }
 
 tr:nth-child(even) {
