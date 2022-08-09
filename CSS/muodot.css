@@ -23,7 +23,6 @@ h3 {
   display: none;
 }
 
-
 .tulosta2 {
   position: absolute;
   width: 100%;
@@ -56,7 +55,7 @@ h3 {
 
 .tulostus {
   position: relative;
-  max-height: 200px;
+  max-height: 500px;
   width: 100%;
   font-size: 9px;
   overflow-y: scroll;
@@ -64,8 +63,9 @@ h3 {
 
 .vikaa {
   color: red;
-  background-color: blue;
+  /*background-color: blue;*/
   font-weight: bolder;
-  box-shadow: 2px 2px;
-  transition-delay: 2.25
+  /*box-shadow: 2px 2px;*/
+  transition-delay: 2.25;
   opacity = 100%;
+}

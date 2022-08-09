@@ -57,7 +57,7 @@ function KeraaTiedot() {
     }
   }
   else if(pit > 0 && pit <= 4) {                              // VIRHE, jos pituus on suurempi kuin 0 mutta jää silti neljään merkkiin
-    virheteksti += "Really? Yritä uudelleen...";
+    virheteksti += "Vain alle 5 merkkiä? Yritä uudelleen...";
   }
   document.getElementById('virhetieto').innerHTML=virheteksti;
   sleep(5);

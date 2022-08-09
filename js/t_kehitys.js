@@ -33,8 +33,6 @@ function poistaTiedot(toiminto,arvo) {
           }
         while(totuus);                                                  // silmukkaa pyöritetään niin kauan, kun totuus -muuttujassa on arvo "true"
       }
-      sleep(2);
-      location.reload();
       break;                                                            // switch-case -osion suorittaminen lopetetaan
   }
 }
@@ -44,42 +42,45 @@ function tayta() {
   let aika = 0;
   let nimi = "";
   tallenna = "";
-  let nimet = ["Eetu Vainionpää",
-               "Joona Mannerkivi",
-               "Hozan Hasan",
-               "Leonardo Lind",
-               "Jussi Hämäläinen",
-               "Joona Mannerkivi",
-               "Hozan Hasan",
-               "Sari Ollila"
+  let nimet = ["Jari Kajanus",
+               "Jukka Kuusisto",
+               "Oona Hakkarainen",
+               "Jukka Kolehmainen",
+               "Virpi Vakka",
+               "Seppo Junkkari",
+               "Minna Kajanus",
+               "Hanna Hakulinen",
+               "Jerkku Jymy"
               ];
   for(let a in nimet) {
     rivi++;
     switch (rivi) {
       case 0:
-      aika = + new Date(2022, 5, 21, 11, 20, 30, 180);
+      aika = + new Date(2022, 10, 24, 10, 33, 30, 180);
       break;
       case 1:
-      aika = + new Date(2022, 5, 16, 8, 45, 30, 180);
+      aika = + new Date(2022, 0, 24, 10, 33, 30, 180);
       break;
       case 2:
-      aika = + new Date(2022, 5, 15, 12, 16, 30, 180);
+      aika = + new Date(2022, 8, 24, 10, 33, 30, 180);
       break;
       case 3:
-      aika = + new Date(2022, 5, 15, 10, 3, 30, 180);
+      aika = + new Date(2021, 8, 24, 10, 33, 30, 180);
       break;
       case 4:
-      aika = + new Date(2022, 5, 15, 9, 43, 30, 180);
+      aika = + new Date(2021, 7, 24, 10, 33, 30, 180);
       break;
       case 5:
-      aika = + new Date(2022, 5, 15, 8, 48, 30, 180);
+      aika = + new Date(2020, 11, 24, 10, 33, 30, 180);
       break;
       case 6:
-      aika = + new Date(2022, 5, 14, 13, 48, 30, 180);
+      aika = + new Date(2020, 10, 24, 10, 33, 30, 180);
       break;
       case 7:
-      aika = + new Date(2022, 5, 14, 13, 16, 30, 180);
+      aika = + new Date(2019, 11, 24, 10, 33, 30, 180);
       break;
+      case 8:
+      aika = + new Date(2019, 9, 24, 10, 33, 30, 180);
     }
     console.log("aika = " + aika + ", nimi = " + nimet[a]);
     localStorage.setItem(aika,nimet[a]);
