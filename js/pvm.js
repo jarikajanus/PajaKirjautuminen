@@ -26,7 +26,7 @@ function pvmlaskenta(Vl) {
 
 function kklaskenta(Vl) {
   const Time =new Date(Vl);
-  let Aika =Time.getMonth();
+  let Aika =Time.getMonth()+1;
   return Aika;
 }
 

@@ -60,7 +60,8 @@ function KeraaTiedot() {
     virheteksti += "Vain alle 5 merkkiä? Yritä uudelleen...";
   }
   document.getElementById('virhetieto').innerHTML=virheteksti;
-  sleep(5);
+  document.getElementById('inputti').value = "";
+  sleep(3);
   document.getElementById('inputti').focus();
 }
 
@@ -79,16 +80,19 @@ function tarkastaNimi(vl) {
 //function lueTiedostosta() {
 function lueTiedostosta() {
   // Alustetaan muuttujat
-  let laskuri = 0;
+  let kklaskuri = [];                                          // kuukausien kirjauslaskuri
+  let laskuri = 0;                                             // laskuri localStorage käyttöön
   let tot = true;                                              // silmukan minimiarvo
   let vr = [];                                                 // nimestä ja ajasta saatu taulukko
   let nimi = "";                                               // alustetaan muuttuja nimitiedolle
   let aika = "";                                               // alustetaan muuttuja käynnin aikatiedolle
   let vuosi = "";                                              // esitellään vuosi -muuttuja
+  let kuukausi = "";                                           // esitellään kuukausi -muuttuja
+  let kk_nimet = ["","Tammi","Helmi","Maalis","Huhti","Touko","Kesä","Heinä","Elo","Syys","Loka","Marras","Joulu"];
+  let k1=0;let k2=0;let k3=0;let k4=0;let k5=0;let k6=0;let k7=0;let k8=0;let k9=0;let k10=0;let k11=0;let k12=0;
   let tulosta = "</div><div class='tulostus'>";                // esitellään kirjautuneiden luettelo
   tulosta += "<table><tr><th style='width:400px'>Nimi</th><th style='width:100px'>Aika</th></tr>";
   let ruudulle = "<div class='tulostus'>";                     // esitellään vuosien luettelo
-  ruudulle += "<table><tr><th style='width:220px'>Vuosi</th></tr>";
   const vuosiLuettelo = [];                                    // esitellään vuosilukujen taulukko
   const nimet_a = [];                                          // Luodaan taulukko a (lajiteltu nimen nukaan)
   let avain = "";
@@ -99,24 +103,68 @@ function lueTiedostosta() {
       nimi = localStorage.getItem(avain);                      // nimi -muuttuja saa arvoksi taulukon arvon
       aika = pvmlaskenta(parseInt(avain));                     // aika -muuttujalle annetaan pvmlaskenta -funktiossa määritetty numero
       vuosi = vvlaskenta(parseInt(avain));                     // vuosi -muuttujalle annetaan vvlaskenta -funktiossa määritetty numero
+      kuukausi = kklaskenta(parseInt(avain));                  // kuukausi -muuttujalle annetaan kklaskenta -funktiossa määritetty numero
       if(!vuosiLuettelo.includes(vuosi)) {
         vuosiLuettelo.push(vuosi);                             // lisätään vuosi luetteloon jos sitä ei vielä ole
       }
-      laskuri++;                                               // kasvatetaan laskuria yhdellä
-      nimet_a.push(avain + "," + aika + "," + nimi);           // lisätään taulukkoon tallenne
+      nimet_a.push(avain + "," + aika + "," + nimi + "," + vuosi + "," + kuukausi);           // lisätään taulukkoon tallenne
+      laskuri++;
     }
     else tot = false;
   }
   while (tot);
-  // lajitellaan taulukot
   vuosiLuettelo.sort();
   vuosiLuettelo.reverse();
   nimet_a.sort();
   nimet_a.reverse();
   // Luodaan HTML -koodit, joilla luettelot näytetään
-  // Ensin vuodet
-  for(i = 0; i < vuosiLuettelo.length; i++) {
-    ruudulle += "<tr><td width='220px'>" + vuosiLuettelo[i] + "</td></tr>";  // lisätään tulostettavaan luetteloon vuosiluku
+
+  // Tulostetaan ruudulle kokonaiskirjautumismöäärä
+  ruudulle += "<p class='w3-large w3-text-black' style='text-align:center;'>Kokonaiskävijämäärä: " + nimet_a.length + "</p>";
+  for(var k = 0; k < vuosiLuettelo.length; k++) {
+    // Nollataan kuukausien laskentamuuttujat
+    k1=0;k2=0;k3=0;k4=0;k5=0;k6=0;k7=0;k8=0;k9=0;k10=0;k11=0;k12=0;
+    // Aloitetaan vuosien käsittely
+    ruudulle += "<p class='w3-small w3-text-blue' style='text-align:center;'>" + vuosiLuettelo[k] + " </p>";                              // lisätään tulostettavaan luetteloon vuosiluku
+    for(var o = 0; o < nimet_a.length; o++) {
+      vr = nimet_a[o].split(",");
+      vuosi = parseInt(vr[3]);
+      kuukausi = parseInt(vr[4]);
+      if(vuosi == parseInt(vuosiLuettelo[k])) {
+        switch(kuukausi) {
+          case 1: k1++;break;
+          case 2: k2++;break;
+          case 3: k3++;break;
+          case 4: k4++;break;
+          case 5: k5++;break;
+          case 6: k6++;break;
+          case 7: k7++;break;
+          case 8: k8++;break;
+          case 9: k9++;break;
+          case 10: k10++;break;
+          case 11: k11++;break;
+          case 12: k12++;break;
+        }
+      }
+    }
+    ruudulle += "<p class='w3-small w3-text-blue'>";
+    for(var z = 1; z <= 12; z++) {
+      switch(z) {
+        case 1: ruudulle += kk_nimet[z] + " => " + k1 + "<br>";break;
+        case 2: ruudulle += kk_nimet[z] + " => " + k2 + "<br>";break;
+        case 3: ruudulle += kk_nimet[z] + " => " + k3 + "<br>";break;
+        case 4: ruudulle += kk_nimet[z] + " => " + k4 + "<br>";break;
+        case 5: ruudulle += kk_nimet[z] + " => " + k5 + "<br>";break;
+        case 6: ruudulle += kk_nimet[z] + " => " + k6 + "<br>";break;
+        case 7: ruudulle += kk_nimet[z] + " => " + k7 + "<br>";break;
+        case 8: ruudulle += kk_nimet[z] + " => " + k8 + "<br>";break;
+        case 9: ruudulle += kk_nimet[z] + " => " + k9 + "<br>";break;
+        case 10: ruudulle += kk_nimet[z] + " => " + k10 + "<br>";break;
+        case 11: ruudulle += kk_nimet[z] + " => " + k11 + "<br>";break;
+        case 12: ruudulle += kk_nimet[z] + " => " + k12 + "<br>";break;
+      }
+    }
+    ruudulle += "</p>";
   }
   // sitten kirjautuneet
   for(i = 0; i < nimet_a.length; i++) {
@@ -124,7 +172,7 @@ function lueTiedostosta() {
     nimi = vr[2];
     aika = vr[1];
     avain = document.getElementById("ruska").value.toLowerCase();           // muutetaan kaikki kirjaimet pieniksi
-    const IsotSivulta = avain.split(' ').map(capitalize).join(' ');       // muutetaan ekat sanat alkamaan isolla kirjaimella
+    const IsotSivulta = avain.split(' ').map(capitalize).join(' ');         // muutetaan ekat sanat alkamaan isolla kirjaimella
     if(IsotSivulta == nimi || !avain) {
       tulosta += "<tr><td width='220px'>\"" + nimi + "\"</td><td width='73px'>" + aika + "</td></tr>";
     }

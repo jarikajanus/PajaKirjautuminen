@@ -63,9 +63,8 @@ h3 {
 
 .vikaa {
   color: red;
-  /*background-color: blue;*/
   font-weight: bolder;
-  /*box-shadow: 2px 2px;*/
+  font-size: 20px;
   transition-delay: 2.25;
   opacity = 100%;
 }
