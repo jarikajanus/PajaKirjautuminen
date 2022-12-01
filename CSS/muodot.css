@@ -32,6 +32,7 @@ h3 {
 
 .yks {
   position: relative;
+  top: 0;
   width: 30%;
   transform: translateX(120%);
   display: block;

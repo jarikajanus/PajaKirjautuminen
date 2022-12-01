@@ -1,4 +1,4 @@
-function poistaTiedot(toiminto,arvo) {
+function poistaTiedot(toimintosuiv) {
   // esitellään muuttujat ja annetaan niihin alkuarvot
   let vr = "";                          // tallenteista luettu rivi; laskuri i kertoo monesko rivi
   let vl = [];                          // tallenne purettuna pilkulla erotettuihin lohkoihin (= taulukon arvoihin)
@@ -36,6 +36,10 @@ function poistaTiedot(toiminto,arvo) {
       sleep(2);
       location.reload();
       break;                                                            // switch-case -osion suorittaminen lopetetaan
+
+   case 3: // "puhdistaa pöydän" eli tekee reloadin
+     location.reload();
+     break;
   }
 }
 

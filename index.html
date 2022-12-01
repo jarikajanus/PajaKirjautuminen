@@ -18,7 +18,8 @@
   <script src="js/t.js"></script>
   <script src="js/eventit.js"></script>
 </head>
-<body>
+<body onload = "tsekkaaSivu()">
+  <!-- <script tsekkaaSivu();></script> -->
   <div class="w3-display-container w3-text-black">
     <img src="Kuvat/Keuda.jpg" alt="Keuda Keskikadun toimipisteen kuva" ondblclick="muuta()">
     <div class="w3-display-middle w3-panel w3-round-xxlarge w3-teal w3-opacity-min">
@@ -31,6 +32,8 @@
       <tr>
         <td><input type='text' id='ruska' name='ruska' class='ruska' placeholder='Etsittävän/poistettavan nimi...'
           onkeypress='clickPress2(event)' onchange='lueTiedostosta(this.value)'></td>
+        <td><button type="button" class="ball b3" id="b4" onmouseover="Styde(4)" onmouseout="Back(4)"
+          onClick="poistaTiedot(3)"><< Tyhjennä (reload)</button></td>
         <td><button type="button" class="ball b2" id="b2" onmouseover="Styde(2)" onmouseout="Back(2)"
           onClick="poistaTiedot(2)">Poista valitut oppilaat</button></td>
         <td><button type="button" class="ball b3" id="b3" onmouseover="Styde(3)" onmouseout="Back(3)"

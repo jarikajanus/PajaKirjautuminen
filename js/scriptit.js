@@ -100,14 +100,18 @@ function lueTiedostosta() {
   // haetaan arvot ja tallennetaan ne taulukoihin
   do {
     if(avain = localStorage.key(laskuri)) {                    // Haetaan localStoragesta seuraava avain
+      console.log(avain);
       nimi = localStorage.getItem(avain);                      // nimi -muuttuja saa arvoksi taulukon arvon
       aika = pvmlaskenta(parseInt(avain));                     // aika -muuttujalle annetaan pvmlaskenta -funktiossa määritetty numero
       vuosi = vvlaskenta(parseInt(avain));                     // vuosi -muuttujalle annetaan vvlaskenta -funktiossa määritetty numero
       kuukausi = kklaskenta(parseInt(avain));                  // kuukausi -muuttujalle annetaan kklaskenta -funktiossa määritetty numero
-      if(!vuosiLuettelo.includes(vuosi)) {
-        vuosiLuettelo.push(vuosi);                             // lisätään vuosi luetteloon jos sitä ei vielä ole
+      muistista = localStorage.getItem(avain);   // nimi -muuttuja saa muistista luetun arvon
+      if(muistista != "yks" && muistista !="tulosta") {
+        nimet_a.push(avain + "," + aika + "," + nimi + "," + vuosi + "," + kuukausi);           // lisätään taulukkoon tallenne
+        if(!vuosiLuettelo.includes(vuosi)) {
+          vuosiLuettelo.push(vuosi);                             // lisätään vuosi luetteloon jos sitä ei vielä ole
+        }
       }
-      nimet_a.push(avain + "," + aika + "," + nimi + "," + vuosi + "," + kuukausi);           // lisätään taulukkoon tallenne
       laskuri++;
     }
     else tot = false;
