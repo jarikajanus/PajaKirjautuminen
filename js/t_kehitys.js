@@ -1,4 +1,4 @@
-function poistaTiedot(toiminto,arvo) {
+function poistaTiedot(toiminto) {
   // esitellään muuttujat ja annetaan niihin alkuarvot
   let vr = "";                          // tallenteista luettu rivi; laskuri i kertoo monesko rivi
   let vl = [];                          // tallenne purettuna pilkulla erotettuihin lohkoihin (= taulukon arvoihin)
@@ -38,6 +38,33 @@ function poistaTiedot(toiminto,arvo) {
 }
 
 function tayta() {
+let c = 0;
+let nimi = "";
+let aika = "";
+let kk = 0;
+/*
+(year, month, day, hours, minutes, seconds, milliseconds);
+*/
+for(c = 1; c < 21; c++) {
+  kk++;
+  if(kk>12) kk=1;
+  nimi = "Oppilas_" + c;
+  aika = new Date(2022, kk, c, 10, 33, 30, 180);
+  console.log("aika = " + aika + ", nimi = " + nimi);
+  alert("aika = " + aika + ", nimi = " + nimi);
+  localStorage.setItem(aika,nimi);
+}
+for(c = 21; c < 42; c++) {
+  kk++;
+  if(kk>12) kk=1;
+  nimi = "Oppilas_" + c;
+  aika = new Date(2023, c, kk, 10, 33, 30, 180);
+  console.log("aika = " + aika + ", nimi = " + nimi);
+  alert("aika = " + aika + ", nimi = " + nimi);
+  localStorage.setItem(aika,nimi);
+}
+confirm("Paina jotakin ...");
+/*
   let rivi=-1;
   let aika = 0;
   let nimi = "";
@@ -84,5 +111,5 @@ function tayta() {
     }
     console.log("aika = " + aika + ", nimi = " + nimet[a]);
     localStorage.setItem(aika,nimet[a]);
-  }
+  }*/
 }

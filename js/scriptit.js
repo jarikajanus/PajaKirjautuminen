@@ -100,7 +100,7 @@ function lueTiedostosta() {
   // haetaan arvot ja tallennetaan ne taulukoihin
   do {
     if(avain = localStorage.key(laskuri)) {                    // Haetaan localStoragesta seuraava avain
-      console.log(avain);
+      // console.log(avain);
       nimi = localStorage.getItem(avain);                      // nimi -muuttuja saa arvoksi taulukon arvon
       aika = pvmlaskenta(parseInt(avain));                     // aika -muuttujalle annetaan pvmlaskenta -funktiossa määritetty numero
       vuosi = vvlaskenta(parseInt(avain));                     // vuosi -muuttujalle annetaan vvlaskenta -funktiossa määritetty numero
@@ -177,7 +177,9 @@ function lueTiedostosta() {
     aika = vr[1];
     avain = document.getElementById("ruska").value.toLowerCase();           // muutetaan kaikki kirjaimet pieniksi
     const IsotSivulta = avain.split(' ').map(capitalize).join(' ');         // muutetaan ekat sanat alkamaan isolla kirjaimella
-    if(IsotSivulta == nimi || !avain) {
+    /*console.log("Avain = " + avain + ", pituus = " + avain.length + ",nimi = " + nimi + ", pituus = " + nimi.length);
+    console.log("nimi.substring = " + nimi.substring(0, avain.length).toLowerCase());*/
+    if(IsotSivulta == nimi || avain == nimi.substring(0, avain.length).toLowerCase()) {
       tulosta += "<tr><td width='220px'>\"" + nimi + "\"</td><td width='73px'>" + aika + "</td></tr>";
     }
   }
