@@ -129,7 +129,7 @@ function lueTiedostosta() {
     // Nollataan kuukausien laskentamuuttujat
     k1=0;k2=0;k3=0;k4=0;k5=0;k6=0;k7=0;k8=0;k9=0;k10=0;k11=0;k12=0;
     // Aloitetaan vuosien käsittely
-    ruudulle += "<p class='w3-small w3-text-blue' style='text-align:center;'>" + vuosiLuettelo[k] + " </p>";                              // lisätään tulostettavaan luetteloon vuosiluku
+    ruudulle += "<p class='w3-medium w3-text-white' style='text-align:center;'>" + vuosiLuettelo[k] + " </p>";                              // lisätään tulostettavaan luetteloon vuosiluku
     for(var o = 0; o < nimet_a.length; o++) {
       vr = nimet_a[o].split(",");
       vuosi = parseInt(vr[3]);
@@ -151,7 +151,7 @@ function lueTiedostosta() {
         }
       }
     }
-    ruudulle += "<p class='w3-small w3-text-blue'>";
+    ruudulle += "<p class='w3-medium w3-text-white'>";
     for(var z = 1; z <= 12; z++) {
       switch(z) {
         case 1: ruudulle += kk_nimet[z] + " => " + k1 + "<br>";break;

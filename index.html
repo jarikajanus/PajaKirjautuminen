@@ -6,7 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Kirjautuminen Pajaan</title>
   <link rel="icon" type="image/x-icon" href="Kuvat/Compass.png">
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="CSS/w3.css">
+  <link rel="stylesheet" href="CSS/sijoittelu.css">
   <link rel="stylesheet" href="CSS/napit.css">
   <link rel="stylesheet" href="CSS/muodot.css">
   <link rel="stylesheet" href="CSS/taulukko.css">
@@ -40,10 +41,19 @@
           onClick="poistaTiedot(1)">Poista kaikki</button></td>
       </tr>
     </table>
-    <table>
-      <tr><td><p id="ruudulle"></p></td><td><p id="ruudulle2"></td></tr>
-    </table>
+    <div class="flex-container">
+      <div>
+        <p id="ruudulle"></p>
+      </div>
+      <div>
+        <p id="ruudulle2"></p>
+      </div>
+    </div>
   </div>
+  </div>
+  <script>
+    lueTiedostosta();
+  </script>
   <div class="yks" id="yks">
     <h3>Kirjaudu antamalla nimesi (etunimi sukunimi):<br>
     <h3>Login with your name (firstname last name):</h3><br>
@@ -51,8 +61,5 @@
     <button type="button" class="ball b1" id="b1" onmouseover="Styde(1)" onmouseout="Back(1)" onClick="KeraaTiedot()">Kirjaudu/Login</button>
     <p id="virhetieto" class="vikaa"></p><div>
   </div>
-  <script>
-    lueTiedostosta();
-  </script>
 </body>
 </html>

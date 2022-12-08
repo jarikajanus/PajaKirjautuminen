@@ -38,6 +38,13 @@ h3 {
   display: block;
 }
 
+.kaks {
+  position: relative;
+  top: 0;
+  width: 30%;
+  transform: translateX(120%);
+  display: block;
+}
 ::-webkit-scrollbar {
   width: 5px;
 }
@@ -58,7 +65,7 @@ h3 {
   position: relative;
   max-height: 500px;
   width: 100%;
-  font-size: 9px;
+  font-size: 12px;
   overflow-y: scroll;
 }
 
