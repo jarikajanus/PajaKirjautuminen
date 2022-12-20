@@ -6,7 +6,6 @@ function poistaTiedot(toiminto) {
   let aika = "";                        // alustetaan muuttuja käynnin aikatiedolle (taulukon 2. arvo)
   let laskuri = 0;                      // alustetaan muuttuja paikallisen tietovarasto läpikäyntiä varten
   switch(toiminto) {
-
     case 1: // Poistaa kaikki kirjaukset => tyhjentää rekisterin
       if(confirm("Haluatko varmasti tyhjentää listan kirjautuneista?")) {
         localStorage.clear();
@@ -56,7 +55,6 @@ function tayta() {
     aika = new Date(2022, kk, c, 10, 33, 30, 180);
     aika2 = Date.parse(aika);
     console.log("aika = " + aika2 + ", nimi = " + nimi);
-    //alert("aika = " + aika + ", nimi = " + nimi);
     localStorage.setItem(aika2,nimi);
   }
   for(c = 21; c < 42; c++) {
@@ -66,10 +64,8 @@ function tayta() {
     aika = new Date(2023, c, kk, 10, 33, 30, 180);
     aika2 = Date.parse(aika);
     console.log("aika = " + aika2 + ", nimi = " + nimi);
-    //alert("aika = " + aika + ", nimi = " + nimi);
     localStorage.setItem(aika2,nimi);
   }
-  confirm("Paina jotain...");
 }
 
 //let ms = Date.parse("March 21, 2012");

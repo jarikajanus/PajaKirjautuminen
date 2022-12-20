@@ -6,7 +6,6 @@ function poistaTiedot(toiminto) {
   let aika = "";                        // alustetaan muuttuja käynnin aikatiedolle (taulukon 2. arvo)
   let laskuri = 0;                      // alustetaan muuttuja paikallisen tietovarasto läpikäyntiä varten
   switch (toiminto) {
-
     case 1: // Poistaa kaikki kirjaukset => tyhjentää rekisterin
       if(confirm("Haluatko varmasti tyhjentää listan kirjautuneista?")) {
         localStorage.clear();
@@ -38,78 +37,24 @@ function poistaTiedot(toiminto) {
 }
 
 function tayta() {
-let c = 0;
-let nimi = "";
-let aika = "";
-let kk = 0;
-/*
-(year, month, day, hours, minutes, seconds, milliseconds);
-*/
-for(c = 1; c < 21; c++) {
-  kk++;
-  if(kk>12) kk=1;
-  nimi = "Oppilas_" + c;
-  aika = new Date(2022, kk, c, 10, 33, 30, 180);
-  console.log("aika = " + aika + ", nimi = " + nimi);
-  alert("aika = " + aika + ", nimi = " + nimi);
-  localStorage.setItem(aika,nimi);
-}
-for(c = 21; c < 42; c++) {
-  kk++;
-  if(kk>12) kk=1;
-  nimi = "Oppilas_" + c;
-  aika = new Date(2023, c, kk, 10, 33, 30, 180);
-  console.log("aika = " + aika + ", nimi = " + nimi);
-  alert("aika = " + aika + ", nimi = " + nimi);
-  localStorage.setItem(aika,nimi);
-}
-confirm("Paina jotakin ...");
-/*
-  let rivi=-1;
-  let aika = 0;
+  let c = 0;
   let nimi = "";
-  tallenna = "";
-  let nimet = ["Jari Kajanus",
-               "Jukka Kuusisto",
-               "Oona Hakkarainen",
-               "Jukka Kolehmainen",
-               "Virpi Vakka",
-               "Seppo Junkkari",
-               "Minna Kajanus",
-               "Hanna Hakulinen",
-               "Jerkku Jymy"
-              ];
-  for(let a in nimet) {
-    rivi++;
-    switch (rivi) {
-      case 0:
-      aika = + new Date(2022, 10, 24, 10, 33, 30, 180);
-      break;
-      case 1:
-      aika = + new Date(2022, 0, 24, 10, 33, 30, 180);
-      break;
-      case 2:
-      aika = + new Date(2022, 8, 24, 10, 33, 30, 180);
-      break;
-      case 3:
-      aika = + new Date(2021, 8, 24, 10, 33, 30, 180);
-      break;
-      case 4:
-      aika = + new Date(2021, 7, 24, 10, 33, 30, 180);
-      break;
-      case 5:
-      aika = + new Date(2020, 11, 24, 10, 33, 30, 180);
-      break;
-      case 6:
-      aika = + new Date(2020, 10, 24, 10, 33, 30, 180);
-      break;
-      case 7:
-      aika = + new Date(2019, 11, 24, 10, 33, 30, 180);
-      break;
-      case 8:
-      aika = + new Date(2019, 9, 24, 10, 33, 30, 180);
-    }
-    console.log("aika = " + aika + ", nimi = " + nimet[a]);
-    localStorage.setItem(aika,nimet[a]);
-  }*/
+  let aika = "";
+  let kk = 0;
+  for(c = 1; c < 21; c++) {
+    kk++;
+    if(kk>12) kk=1;
+    nimi = "Oppilas_" + c;
+    aika = new Date(2022, kk, c, 10, 33, 30, 180);
+    console.log("aika = " + aika + ", nimi = " + nimi);
+    localStorage.setItem(aika,nimi);
+  }
+  for(c = 21; c < 42; c++) {
+    kk++;
+    if(kk>12) kk=1;
+    nimi = "Oppilas_" + c;
+    aika = new Date(2023, c, kk, 10, 33, 30, 180);
+    console.log("aika = " + aika + ", nimi = " + nimi);
+    localStorage.setItem(aika,nimi);
+  }
 }
